@@ -15,3 +15,5 @@ dvc==3.33.3
 pyyaml
 pandas
 scikit-learn
+dvclive
+matplotlib
