@@ -4,4 +4,9 @@ stages:
     deps:
     - .\data\raw\creditcard.csv
     - .\src\data\make_dataset.py
+  train_model:
+    cmd: python .\src\models\train_model.py .\data\processed\
+    deps:
+    - .\src\models\train_model.py
+    - .\data\processed\
     
