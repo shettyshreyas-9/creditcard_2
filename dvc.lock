@@ -23,3 +23,19 @@ stages:
       hash: md5
       md5: 8378866bf8d6e62371c9e39bd5dcb227
       size: 1243
+  visualize:
+    cmd: python .\src\visualization\visualize.py .\models\model.joblib .\data\processed\
+    deps:
+    - path: .\data\processed\
+      hash: md5
+      md5: 5cc5e33493d3a6f535e742e3a74c772a.dir
+      size: 151102527
+      nfiles: 3
+    - path: .\models\model.joblib
+      hash: md5
+      md5: 800c0fe1d6f900e84b67070694ec1de8
+      size: 30649
+    - path: .\src\visualization\visualize.py
+      hash: md5
+      md5: 61cb83de1f7dcbc7d33f4cd8ecbe1c8d
+      size: 1915
