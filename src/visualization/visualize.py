@@ -39,6 +39,49 @@ def evaluate(model,X,y,split,live,save_path):
     live.summary["avg_prec"][split] = avg_prec
     live.summary["roc_auc"][split] = roc_auc 
 
+     # ... and plots...
+    # ... like an roc plot...
+    live.log_sklearn_plot("roc",y, predictions,name= f"roc/{split}")
+
+    # ... and precision recall plot...
+    # ... which passes `drop_intermediate=True` to the sklearn method...
+    live.log_sklearn_plot(
+        "precision_recall",
+        y,
+        predictions,
+        name=f"prc/{split}",
+        drop_intermediate=True,
+    )
+    # ... and confusion matrix plot
+    live.log_sklearn_plot(
+        "confusion_matrix",
+        y,
+        predictions_by_class.argmax(-1),
+        name=f"cm/{split}",
+    )
+
+    
+    
+def save_importance_plot(live, model, feature_names):
+    """
+    Save feature importance plot.
+
+    Args:
+        live (dvclive.Live): DVCLive instance.
+        model (sklearn.ensemble.RandomForestClassifier): Trained classifier.
+        feature_names (list): List of feature names.
+    """
+    fig, axes = plt.subplots(dpi=100)
+    fig.subplots_adjust(bottom=0.2, top=0.95)
+    axes.set_ylabel("Mean decrease in impurity")
+
+    importances = model.feature_importances_
+    forest_importances = pd.Series(importances, index=feature_names).nlargest(n=10)
+    forest_importances.plot.bar(ax=axes)
+
+    live.log_image("importance.png", fig)
+
+
 def main():
 
     curr_dir = pathlib.Path(__file__)
