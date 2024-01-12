@@ -91,3 +91,6 @@ target/
 /data
 /tmp_storage
 /dvclive
+
+/venv
+/venv2
