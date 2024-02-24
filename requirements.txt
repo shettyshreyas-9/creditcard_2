@@ -22,3 +22,5 @@ matplotlib
 fastapi
 joblib
 uvicorn
+
+gunicorn
