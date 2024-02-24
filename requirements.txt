@@ -17,3 +17,8 @@ pandas
 scikit-learn
 dvclive
 matplotlib
+
+
+fastapi
+joblib
+uvicorn
