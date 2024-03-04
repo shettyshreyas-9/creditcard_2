@@ -66,7 +66,7 @@ jobs:
           echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
 
   
-  Continuous Deployment:
+  Continuous-Deployment:
     runs-on: ip-172-31-20-157
     needs: build-and-push-ecr-image
     steps:
