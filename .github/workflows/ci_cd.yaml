@@ -71,16 +71,6 @@ jobs:
     needs: build-and-push-ecr-image
     steps:
 
-      # - name: Install Utilities
-      #   run: |
-      #     sudo apt-get update
-      #     sudo apt-get install -y jq unzip
-
-      # - name: Start Docker Service
-      #   run: sudo service docker start
-
-      # - name: Add user to docker group
-      #   run: sudo usermod -aG docker $USER
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
@@ -89,13 +79,6 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
 
-      
-
-      # - name: Setup Docker-in-Docker (DinD)
-      #   run: |
-      #     docker run --privileged --rm tonistiigi/binfmt --install all
-      #     docker buildx create --use
-      #     docker buildx inspect --bootstrap
 
       
       - name: Login to Amazon ECR
@@ -115,10 +98,7 @@ jobs:
         run: |
           docker rm -f creditcard || true
 
-      
-      # - name: Run Docker Image to serve users
-      #   run: |
-      #     docker run -d -p 8000:8000 --ipc="host" --name=creditcard -e 'AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID}}' -e 'AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY}}' -e 'AWS_REGION=${{ secrets.AWS_REGION }}' ${{secrets.AWS_ECR_LOGIN_URI}}/${{ secrets.ECR_REPOSITORY_NAME }}:latest
+  
           
       - name: Run Docker Image to serve users
         run: |
