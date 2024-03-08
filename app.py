@@ -40,7 +40,7 @@ class PredictionInput(BaseModel):
 
 
 # Load the pre-trained RandomForest model
-model_path = "models/model.joblib"
+model_path = "model.joblib"
 model = load(model_path)
 
 
@@ -94,4 +94,4 @@ def predict(input_data: PredictionInput):
 
 if __name__ == '__main__':
     import uvicorn
-    uvicorn.run(app, host="127.0.0.1", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=8080)
